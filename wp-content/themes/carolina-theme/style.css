@@ -455,3 +455,18 @@ color: #ffffff;
 .storefront-sticky-add-to-cart a:not(.button) {
     color: #595959;
 }
+
+/* new styles */
+
+.storefront-product-section.storefront-product-categories ul.products li img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: all .5s ease;
+}
+
+.storefront-product-section.storefront-product-categories ul.products li img:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    transform: scale(1.1, 1.1);
+
+}

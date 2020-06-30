@@ -473,3 +473,16 @@ color: #ffffff;
 .fa.fa-shopping-cart:before {
     margin-right: 10px;
 }
+
+.storefront-primary-navigation {
+    background-color: #e282a8;
+}
+
+.storefront-primary-navigation .menu.nav-menu li a, .site-header-cart li span, .site-header-cart .cart-contents::after {
+    color: white;
+}
+
+.storefront-primary-navigation .menu.nav-menu li.current-menu-item a {
+    color: white;
+    font-weight: bold;
+}

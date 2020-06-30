@@ -474,15 +474,33 @@ color: #ffffff;
     margin-right: 10px;
 }
 
-.storefront-primary-navigation {
+@media only screen and (min-width: 768px) {
+
+    .storefront-primary-navigation, .sub-menu li a {
+        background-color: #e282a8;
+    }
+    
+    .sub-menu li a:hover {
+        background-color: #e282b8 !important;
+    }
+    
+    .storefront-primary-navigation .menu.nav-menu li a, .site-header-cart li span, .site-header-cart .cart-contents::after {
+        color: white;
+    }
+    
+    .storefront-primary-navigation .menu.nav-menu li.current-menu-item a {
+        color: white;
+        font-weight: bold;
+    }
+}
+
+
+
+.woocommerce-message {
     background-color: #e282a8;
-}
-
-.storefront-primary-navigation .menu.nav-menu li a, .site-header-cart li span, .site-header-cart .cart-contents::after {
     color: white;
 }
 
-.storefront-primary-navigation .menu.nav-menu li.current-menu-item a {
-    color: white;
-    font-weight: bold;
+.site-header .site-branding {
+    margin-bottom: 1em;
 }

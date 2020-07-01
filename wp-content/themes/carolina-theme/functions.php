@@ -27,3 +27,12 @@ add_action('init', 'spa_copyright');
 function spa_new_footer() {
     echo "<div class='copyright'>Copyright &copy;". get_bloginfo('name') . " " . get_the_date('Y') ."</div>";
 }
+
+// add image to homepage
+function spa_discount() {
+    $image = "<div class='offer'>";
+    $image .= "<img src='".get_stylesheet_directory_uri()."/img/cupon.jpg' />";
+    $image .= "</div>";
+    echo $image;
+}
+add_action('homepage', 'spa_discount', 9);

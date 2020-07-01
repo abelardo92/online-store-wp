@@ -17,3 +17,13 @@ function carolinaspa_mxn($symbol, $coin) {
     $symbol = "MXN $";
     return $symbol;
 }
+
+// update footer's copyright
+function spa_copyright() {
+    remove_action('storefront_footer', 'storefront_credit', 20);
+    add_action('storefront_after_footer', 'spa_new_footer', 20);
+}
+add_action('init', 'spa_copyright');
+function spa_new_footer() {
+    echo "<div class='copyright'>Copyright &copy;". get_bloginfo('name') . " " . get_the_date('Y') ."</div>";
+}

@@ -6,9 +6,17 @@ add_action('woocommerce_single_product_summary', 'woocommerce_template_single_pr
 // hooks filter example
 add_filter('loop_shop_per_page', 'products_per_page');
 
-function products_per_page($columns) {
-    return 3;
+function products_per_page($products) {
+    return 30;
 }
+
+// columns per produts page
+function spa_columns($columns) {
+    $columns = 4;
+    return $columns;
+}
+add_filter('loop_shop_columns', 'spa_columns', 20);
+
 
 // change to mexican pesos (MXN)
 add_filter('woocommerce_currency_symbol', 'carolinaspa_mxn', 10, 2);
@@ -37,10 +45,32 @@ function spa_discount() {
 }
 add_action('homepage', 'spa_discount', 9);
 
-// show 4 cateogires in homepage
+// show 4 categories in homepage
 function spa_categories($args) {
     $args['limit'] = 4;
     $args['columns'] = 4;
     return $args;
 }
 add_filter('storefront_product_categories_args','spa_categories', 100);
+
+// change text to filter
+function spa_change_sort($filter) {
+
+    // Example to show variables content
+
+    // echo "<pre>";
+    // var_dump($filter);
+    // echo "</pre>";
+
+    $filter['date'] = __('New Products First', 'woocommerce');
+    return $filter;
+}
+add_filter('woocommerce_catalog_orderby','spa_change_sort', 40);
+
+//  remove tabs
+add_filter('woocommerce_product_tabs', 'spa_product_tabs', 11, 1);
+function spa_product_tabs($tabs) {
+    // example to remove a description
+    // unset($tabs['description']);
+    return $tabs;
+}

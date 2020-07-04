@@ -36,3 +36,11 @@ function spa_discount() {
     echo $image;
 }
 add_action('homepage', 'spa_discount', 9);
+
+// show 4 cateogires in homepage
+function spa_categories($args) {
+    $args['limit'] = 4;
+    $args['columns'] = 4;
+    return $args;
+}
+add_filter('storefront_product_categories_args','spa_categories', 100);

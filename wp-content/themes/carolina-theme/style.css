@@ -577,3 +577,26 @@ span.saving {
 footer span.saving {
     color: #fff;
 }
+
+/* homepage new section styles */
+.image-category {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.image-destacada {
+    height: 300px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.image-category h1 {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    background-color: #e282a8;
+    color: #fff;
+    padding: 5px 20px;
+
+}

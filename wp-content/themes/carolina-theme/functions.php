@@ -52,7 +52,7 @@ function spa_new_product_presentation() {
     $image = get_woocommerce_term_meta(20, 'thumbnail_id', true);
     $image_category = wp_get_attachment_image_src($image, 'full');
     if($image_category) {
-        echo "<div class='image-descacada' style='background-image:url(".$image_category[0].")'></div>";
+        echo "<div class='image-destacada' style='background-image:url(".$image_category[0].")'></div>";
         echo "<h1>Spa en casa</h1>";
         echo "</div>";
     }

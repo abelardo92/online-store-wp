@@ -562,3 +562,18 @@ color: #ffffff;
 .offer {
     margin-bottom: 30px;
 }
+
+span.saving {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 500;
+    padding: .3em;
+    text-align: right;
+    display: inline-block;
+    border: 1px solid #4cae4c;
+    margin-top: 0.8em;
+}
+
+footer span.saving {
+    color: #fff;
+}

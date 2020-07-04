@@ -74,3 +74,40 @@ function spa_product_tabs($tabs) {
     // unset($tabs['description']);
     return $tabs;
 }
+
+// show discounts in amount
+
+// add_filter('woocommerce_get_price_html', 'spa_quantity_saved', 10, 2);
+// function spa_quantity_saved($price, $product) {
+//     if($product->sale_price) {
+//         $saving = wc_price($product->regular_price - $product->sale_price);
+//         return $price ."<br>". sprintf(__('<span class="saving"> You will save %s</span>', 'woocommerce'), $saving);
+//     }
+//     return $price;
+// }
+
+// show discounts in percentaje
+// add_filter('woocommerce_get_price_html', 'spa_percentaje_saved', 10, 2);
+// function spa_percentaje_saved($price, $product) {
+//     if($product->sale_price) {
+//         $percentaje = round(($product->regular_price - $product->sale_price)/($product->regular_price) * 100);
+//         return $price ."<br>". sprintf(__('<span class="saving"> You will save %s &#37</span>', 'woocommerce'), $percentaje);
+//     }
+//     return $price;
+// }
+
+// show saving in percentaje or amount depending on product price
+function spa_saved_money($price, $product) {
+    $regular_price = $product->get_regular_price();
+    if($product->sale_price) {
+        if($regular_price < 100) {
+            $percentaje = round(($product->regular_price - $product->sale_price)/($product->regular_price) * 100);
+            return $price ."<br>". sprintf(__('<span class="saving"> <strong>Save</strong> %s &#37</span>', 'woocommerce'), $percentaje);
+        } else {
+            $saving = wc_price($product->regular_price - $product->sale_price);
+            return $price ."<br>". sprintf(__('<span class="saving"> <strong>Save</strong> %s</span>', 'woocommerce'), $saving);
+        }
+    }
+    return $price;
+}
+add_filter('woocommerce_get_price_html', 'spa_saved_money', 10, 2);

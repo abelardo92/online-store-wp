@@ -564,10 +564,16 @@ color: #ffffff;
 }
 
 span.saving {
-    background-color: #06c406;
-    padding: 10px;
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 500;
+    padding: .3em;
+    text-align: right;
     display: inline-block;
+    border: 1px solid #4cae4c;
+    margin-top: 0.8em;
+}
+
+footer span.saving {
     color: #fff;
-    font-weight: bold;
-    margin-top: 15px;
 }

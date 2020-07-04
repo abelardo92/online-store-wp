@@ -102,10 +102,10 @@ function spa_saved_money($price, $product) {
     if($product->sale_price) {
         if($regular_price < 100) {
             $percentaje = round(($product->regular_price - $product->sale_price)/($product->regular_price) * 100);
-            return $price ."<br>". sprintf(__('<span class="saving"> You will save %s &#37</span>', 'woocommerce'), $percentaje);
+            return $price ."<br>". sprintf(__('<span class="saving"> <strong>Save</strong> %s &#37</span>', 'woocommerce'), $percentaje);
         } else {
             $saving = wc_price($product->regular_price - $product->sale_price);
-            return $price ."<br>". sprintf(__('<span class="saving"> You will save %s</span>', 'woocommerce'), $saving);
+            return $price ."<br>". sprintf(__('<span class="saving"> <strong>Save</strong> %s</span>', 'woocommerce'), $saving);
         }
     }
     return $price;

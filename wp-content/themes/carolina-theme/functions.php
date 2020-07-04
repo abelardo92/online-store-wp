@@ -66,3 +66,11 @@ function spa_change_sort($filter) {
     return $filter;
 }
 add_filter('woocommerce_catalog_orderby','spa_change_sort', 40);
+
+//  remove tabs
+add_filter('woocommerce_product_tabs', 'spa_product_tabs', 11, 1);
+function spa_product_tabs($tabs) {
+    // example to remove a description
+    // unset($tabs['description']);
+    return $tabs;
+}

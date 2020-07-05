@@ -145,3 +145,36 @@ function spa_change_title_tab($title) {
     return $post->post_title;
 }
 add_filter('woocommerce_product_description_heading', 'spa_change_title_tab', 10, 1);
+
+// print subtitle with advanced custom fields
+function spa_print_subtitle() {
+    global $post;
+    echo "<p class='subtitle'>".get_field('subtitle', $post->ID)."</p>";
+}
+
+add_filter('woocommerce_single_product_summary', 'spa_print_subtitle', 6);
+
+// new tab for video with advanced custom fields
+function spa_print_video($tabs) {
+    $tabs['video'] = array(
+        "title" => "Video",
+        "priority" => 25,
+        "callback" => 'my_product_video'
+    );
+    return $tabs;
+}
+
+function my_product_video() {
+    global $post;
+    $video = get_field('video', $post->ID);
+    if($video) {
+        echo "<video controls autoplay>";
+        echo "<source src='" . $video . "'>";
+        echo "</video>";
+    } else {
+        "Video is not available";
+    }
+}
+
+add_filter('woocommerce_product_tabs', 'spa_print_video', 11, 1);
+

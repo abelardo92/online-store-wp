@@ -629,3 +629,11 @@ footer span.saving {
         width: 70% !important;
     }
 }
+
+/* subtitle */
+p.subtitle {
+    font-size: 20px;
+    font-style: italic;
+    /* margin-bottom: 5px; */
+    color: #969696;
+}

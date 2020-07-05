@@ -282,3 +282,12 @@ function spa_insert_checkout_custom_fields($order_id) {
     }
 }
 add_action('woocommerce_checkout_update_order_meta', 'spa_insert_checkout_custom_fields');
+
+// add custom fields to orders
+function spa_columns_orders($columns) {
+    $columns['factura'] = __('Factura', 'woocommerce');
+    $columns['rfc'] = __('RFC', 'woocommerce');
+    $columns['heard_us'] = __('How did you heard about us?', 'woocommerce');
+    return $columns;
+}
+add_filter('manage_edit-shop_order_columns', 'spa_columns_orders');

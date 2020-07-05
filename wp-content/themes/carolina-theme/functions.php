@@ -45,6 +45,24 @@ function spa_discount() {
 }
 add_action('homepage', 'spa_discount', 9);
 
+// create new section in home
+function spa_new_product_presentation() {
+    echo "<div class='spa-in-home'>";
+    echo "<div class='image-category'>";
+    $image = get_woocommerce_term_meta(20, 'thumbnail_id', true);
+    $image_category = wp_get_attachment_image_src($image, 'full');
+    if($image_category) {
+        echo "<div class='image-destacada' style='background-image:url(".$image_category[0].")'></div>";
+        echo "<h1>Spa en casa</h1>";
+        echo "</div>";
+    }
+    echo "<div class='products'>";
+    echo do_shortcode('[product_category columns="3" category="spa-en-casa"]');
+    echo "</div>";
+    echo "</div>";
+}
+add_action('homepage', 'spa_new_product_presentation', 30);
+
 // show 4 categories in homepage
 function spa_categories($args) {
     $args['limit'] = 4;
@@ -111,3 +129,19 @@ function spa_saved_money($price, $product) {
     return $price;
 }
 add_filter('woocommerce_get_price_html', 'spa_saved_money', 10, 2);
+
+// change tab text for product name
+function spa_change_tab_text($tabs) {
+    global $post;
+    if(isset($tabs['description']['title'])) {
+        $tabs['description']['title'] = $post->post_title;
+    }
+    return $tabs;
+}
+add_filter('woocommerce_product_tabs', 'spa_change_tab_text', 10, 1);
+
+function spa_change_title_tab($title) {
+    global $post;
+    return $post->post_title;
+}
+add_filter('woocommerce_product_description_heading', 'spa_change_title_tab', 10, 1);

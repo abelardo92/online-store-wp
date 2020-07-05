@@ -577,3 +577,55 @@ span.saving {
 footer span.saving {
     color: #fff;
 }
+
+/* homepage new section styles */
+.image-category {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.image-destacada {
+    height: 300px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.image-category h1 {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    background-color: #e282a8;
+    color: #fff;
+    padding: 5px 20px;
+
+}
+
+@media (min-width: 992px) {
+    .spa-in-home:after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+    .image-destacada {
+        height: 600px;
+        background-size:  100%;
+        background-attachment: fixed;
+    }
+    .image-category {
+        width: 55%;
+        float: left;
+    }
+    .spa-in-home .products {
+        width: 35%;
+        float: right;
+    }
+
+    .spa-in-home .products ul.products {
+        width: 100%;
+    }
+
+    .spa-in-home .products ul.products li.product {
+        width: 70% !important;
+    }
+}

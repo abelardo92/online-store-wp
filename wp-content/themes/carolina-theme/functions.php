@@ -314,3 +314,16 @@ function spa_columns_orders_data($columns) {
     return $columns;
 }
 add_action('manage_shop_order_posts_custom_column', 'spa_columns_orders_data');
+
+// Show custom field in orders
+function spa_show_orders_info($order) {
+    $factura = get_post_meta($order->ID, 'factura', true);
+    if($factura) {
+        echo "<p><strong>".__('Factura', 'woocommerce').":</strong> " . ($factura ? "Yes" : "No") . "</p>";
+        $rfc = get_post_meta($order->ID, 'rfc', true);
+        echo "<p><strong>".__('RFC', 'woocommerce').":</strong> $rfc</p>";
+    }
+    $heard_us = get_post_meta($order->ID, 'heard_us', true);
+    echo "<p><strong>".__('How did you heard about us?', 'woocommerce').":</strong> $heard_us</p>";
+}
+add_action('woocommerce_admin_order_data_after_billing_address', 'spa_show_orders_info');

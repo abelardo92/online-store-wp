@@ -178,3 +178,30 @@ function my_product_video() {
 
 add_filter('woocommerce_product_tabs', 'spa_print_video', 11, 1);
 
+// Button to empty cart
+function spa_clean_cart() {
+    echo "<a class='button' href='?empty-cart=true'>".__('Empty Cart','woocommerce')."</a>";
+}
+add_action('woocommerce_cart_actions', 'spa_clean_cart');
+
+function spa_empty_cart() {
+    if(isset($_GET['empty-cart']) && $_GET['empty-cart'] == "true") {
+        global $woocommerce;
+        $woocommerce->cart->empty_cart();
+    }
+}
+add_action('init', 'spa_empty_cart');
+
+// print banner in cart
+function spa_print_banner_cart() {
+    global $post;
+    $image = get_field('image', $post->ID);
+    if($image) {
+        echo "<div class='coupon-cart'>";
+        echo "<img src='".$image."'/>";
+        echo "</div>";
+    }
+
+}
+add_action('woocommerce_check_cart_items', 'spa_print_banner_cart', 10);
+

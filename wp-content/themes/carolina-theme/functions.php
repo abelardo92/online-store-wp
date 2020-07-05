@@ -223,6 +223,22 @@ function spa_rfc($fields) {
         'class' => array('form-row-wide'),
         'label' => 'RFC'
     );
+
+    // select2 class added but not working
+    $fields['order']['heard_us'] = array(
+        'type' => 'select',
+        'css' => array('form-row-wide','select2'),
+        'label' => 'How did you find us?',
+        'options' => array(
+            'default' => 'Select one option...',
+            'tv' => 'TV',
+            'radio' => 'Radio',
+            'newspapper' => 'Newspapper',
+            'facebook' => 'Facebook',
+        ),
+
+    );
+
     return $fields;
 }
 add_filter('woocommerce_checkout_fields', 'spa_rfc', 40, 1);

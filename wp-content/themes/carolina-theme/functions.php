@@ -154,3 +154,27 @@ function spa_print_subtitle() {
 
 add_filter('woocommerce_single_product_summary', 'spa_print_subtitle', 6);
 
+// new tab for video with advanced custom fields
+function spa_print_video($tabs) {
+    $tabs['video'] = array(
+        "title" => "Video",
+        "priority" => 25,
+        "callback" => 'my_product_video'
+    );
+    return $tabs;
+}
+
+function my_product_video() {
+    global $post;
+    $video = get_field('video', $post->ID);
+    if($video) {
+        echo "<video controls autoplay>";
+        echo "<source src='" . $video . "'>";
+        echo "</video>";
+    } else {
+        "Video is not available";
+    }
+}
+
+add_filter('woocommerce_product_tabs', 'spa_print_video', 11, 1);
+

@@ -643,3 +643,10 @@ p.subtitle {
 .coupon-cart {
     margin-bottom: 20px;
 }
+
+/* remove unnecesary section in checkout page */
+.woocommerce-checkout .storefront-primary-navigation,
+.woocommerce-checkout .site-search,
+.woocommerce-checkout .footer-widgets {
+    display: none;
+}

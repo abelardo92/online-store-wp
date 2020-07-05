@@ -600,3 +600,32 @@ footer span.saving {
     padding: 5px 20px;
 
 }
+
+@media (min-width: 992px) {
+    .spa-in-home:after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+    .image-destacada {
+        height: 600px;
+        background-size:  100%;
+        background-attachment: fixed;
+    }
+    .image-category {
+        width: 55%;
+        float: left;
+    }
+    .spa-in-home .products {
+        width: 35%;
+        float: right;
+    }
+
+    .spa-in-home .products ul.products {
+        width: 100%;
+    }
+
+    .spa-in-home .products ul.products li.product {
+        width: 70% !important;
+    }
+}

@@ -56,7 +56,7 @@ function spa_new_product_presentation() {
         echo "<h1>Spa en casa</h1>";
         echo "</div>";
     }
-    echo "<div class='products'";
+    echo "<div class='products'>";
     echo do_shortcode('[product_category columns="3" category="spa-en-casa"]');
     echo "</div>";
     echo "</div>";

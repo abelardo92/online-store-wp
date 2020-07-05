@@ -266,3 +266,19 @@ function spa_hide_show_rfc() {
     }
 }
 add_action('wp_footer', 'spa_hide_show_rfc');
+
+
+// insert custom fields data in database
+
+function spa_insert_checkout_custom_fields($order_id) {
+    if(!empty($_POST['billing_rfc'])) {
+        update_post_meta($order_id, 'rfc', sanitize_text_field($_POST['billing_rfc']));
+    }
+    if(!empty($_POST['billing_factura'])) {
+        update_post_meta($order_id, 'factura', sanitize_text_field($_POST['billing_factura']));
+    }
+    if(!empty($_POST['billing_heard_us'])) {
+        update_post_meta($order_id, 'heard_us', sanitize_text_field($_POST['billing_heard_us']));
+    }
+}
+add_action('woocommerce_checkout_update_order_meta', 'spa_insert_checkout_custom_fields');

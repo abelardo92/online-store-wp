@@ -637,3 +637,9 @@ p.subtitle {
     /* margin-bottom: 5px; */
     color: #969696;
 }
+
+/* cart banner styles */
+
+.coupon-cart {
+    margin-bottom: 20px;
+}

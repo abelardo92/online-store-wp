@@ -191,3 +191,17 @@ function spa_empty_cart() {
     }
 }
 add_action('init', 'spa_empty_cart');
+
+// print banner in cart
+function spa_print_banner_cart() {
+    global $post;
+    $image = get_field('image', $post->ID);
+    if($image) {
+        echo "<div class='coupon-cart'>";
+        echo "<img src='".$image."'/>";
+        echo "</div>";
+    }
+
+}
+add_action('woocommerce_check_cart_items', 'spa_print_banner_cart', 10);
+

@@ -650,3 +650,8 @@ p.subtitle {
 .woocommerce-checkout .footer-widgets {
     display: none;
 }
+
+/* checkout fields */
+#billing_rfc_field {
+    display: none;
+}

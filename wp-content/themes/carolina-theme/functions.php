@@ -217,7 +217,15 @@ function spa_remove_phone($fields) {
 add_filter('woocommerce_checkout_fields', 'spa_remove_phone', 20, 1);
 
 // Add field to checkout
-function spa_rfc($fields) {
+function spa_checkout_fields($fields) {
+
+    $fields['billing']['billing_factura'] = array(
+        'type' => 'checkbox',
+        'class' => array('form-row-wide'),
+        'label' => 'Requiere factura?',
+        'id' => 'factura'
+    );
+
     $fields['billing']['billing_rfc'] = array(
         'type' => 'text',
         'class' => array('form-row-wide'),
@@ -225,7 +233,7 @@ function spa_rfc($fields) {
     );
 
     // select2 class added but not working
-    $fields['order']['heard_us'] = array(
+    $fields['order']['billing_heard_us'] = array(
         'type' => 'select',
         'css' => array('form-row-wide','select2'),
         'label' => 'How did you find us?',
@@ -241,4 +249,20 @@ function spa_rfc($fields) {
 
     return $fields;
 }
-add_filter('woocommerce_checkout_fields', 'spa_rfc', 40, 1);
+add_filter('woocommerce_checkout_fields', 'spa_checkout_fields', 40, 1);
+
+// hide/show RFC
+function spa_hide_show_rfc() {
+    if(is_checkout()) {
+        ?>
+        <script>
+            jQuery(document).ready(function(){
+                jQuery("input[type='checkbox']#factura").on('change', function(){
+                    jQuery("#billing_rfc_field").slideToggle();
+                });
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'spa_hide_show_rfc');

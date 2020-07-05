@@ -205,3 +205,13 @@ function spa_print_banner_cart() {
 }
 add_action('woocommerce_check_cart_items', 'spa_print_banner_cart', 10);
 
+// remove field from checkout form
+
+function spa_remove_phone($fields) {
+    unset($fields['billing']['billing_phone']);
+    // example to add class to field
+    $fields['billing']['billing_email']['class'] = array('form-row-wide','test');
+    return $fields;
+}
+
+add_filter('woocommerce_checkout_fields', 'spa_remove_phone', 20, 1);

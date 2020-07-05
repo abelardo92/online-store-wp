@@ -145,3 +145,12 @@ function spa_change_title_tab($title) {
     return $post->post_title;
 }
 add_filter('woocommerce_product_description_heading', 'spa_change_title_tab', 10, 1);
+
+// print subtitle with advanced custom fields
+function spa_print_subtitle() {
+    global $post;
+    echo "<p class='subtitle'>".get_field('subtitle', $post->ID)."</p>";
+}
+
+add_filter('woocommerce_single_product_summary', 'spa_print_subtitle', 6);
+

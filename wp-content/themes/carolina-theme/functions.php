@@ -291,3 +291,26 @@ function spa_columns_orders($columns) {
     return $columns;
 }
 add_filter('manage_edit-shop_order_columns', 'spa_columns_orders');
+
+// show content inside orders columns
+function spa_columns_orders_data($columns) {
+    global $post, $woocommerce, $order;
+    
+    if(empty($order) || $order->id != $post->ID) {
+        $order = new WC_Order($post->ID);
+    }
+
+    if($columns === "factura") {
+        $factura = get_post_meta($post->ID, 'factura', true);
+        echo $factura ? "Yes" : "No";
+    }
+    if($columns === "rfc") {
+        echo get_post_meta($post->ID, 'rfc', true);
+    }
+    if($columns === "heard_us") {
+        echo get_post_meta($post->ID, 'heard_us', true);
+    }
+
+    return $columns;
+}
+add_action('manage_shop_order_posts_custom_column', 'spa_columns_orders_data');

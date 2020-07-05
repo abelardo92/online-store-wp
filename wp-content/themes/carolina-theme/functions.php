@@ -215,3 +215,14 @@ function spa_remove_phone($fields) {
 }
 
 add_filter('woocommerce_checkout_fields', 'spa_remove_phone', 20, 1);
+
+// Add field to checkout
+function spa_rfc($fields) {
+    $fields['billing']['billing_rfc'] = array(
+        'type' => 'text',
+        'class' => array('form-row-wide'),
+        'label' => 'RFC'
+    );
+    return $fields;
+}
+add_filter('woocommerce_checkout_fields', 'spa_rfc', 40, 1);

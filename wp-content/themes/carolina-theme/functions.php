@@ -205,3 +205,125 @@ function spa_print_banner_cart() {
 }
 add_action('woocommerce_check_cart_items', 'spa_print_banner_cart', 10);
 
+// remove field from checkout form
+
+function spa_remove_phone($fields) {
+    unset($fields['billing']['billing_phone']);
+    // example to add class to field
+    $fields['billing']['billing_email']['class'] = array('form-row-wide','test');
+    return $fields;
+}
+
+add_filter('woocommerce_checkout_fields', 'spa_remove_phone', 20, 1);
+
+// Add field to checkout
+function spa_checkout_fields($fields) {
+
+    $fields['billing']['billing_factura'] = array(
+        'type' => 'checkbox',
+        'class' => array('form-row-wide'),
+        'label' => 'Requiere factura?',
+        'id' => 'factura'
+    );
+
+    $fields['billing']['billing_rfc'] = array(
+        'type' => 'text',
+        'class' => array('form-row-wide'),
+        'label' => 'RFC'
+    );
+
+    // select2 class added but not working
+    $fields['order']['billing_heard_us'] = array(
+        'type' => 'select',
+        'css' => array('form-row-wide','select2'),
+        'label' => 'How did you find us?',
+        'options' => array(
+            'default' => 'Select one option...',
+            'tv' => 'TV',
+            'radio' => 'Radio',
+            'newspapper' => 'Newspapper',
+            'facebook' => 'Facebook',
+        ),
+
+    );
+
+    return $fields;
+}
+add_filter('woocommerce_checkout_fields', 'spa_checkout_fields', 40, 1);
+
+// hide/show RFC
+function spa_hide_show_rfc() {
+    if(is_checkout()) {
+        ?>
+        <script>
+            jQuery(document).ready(function(){
+                jQuery("input[type='checkbox']#factura").on('change', function(){
+                    jQuery("#billing_rfc_field").slideToggle();
+                });
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'spa_hide_show_rfc');
+
+
+// insert custom fields data in database
+
+function spa_insert_checkout_custom_fields($order_id) {
+    if(!empty($_POST['billing_rfc'])) {
+        update_post_meta($order_id, 'rfc', sanitize_text_field($_POST['billing_rfc']));
+    }
+    if(!empty($_POST['billing_factura'])) {
+        update_post_meta($order_id, 'factura', sanitize_text_field($_POST['billing_factura']));
+    }
+    if(!empty($_POST['billing_heard_us'])) {
+        update_post_meta($order_id, 'heard_us', sanitize_text_field($_POST['billing_heard_us']));
+    }
+}
+add_action('woocommerce_checkout_update_order_meta', 'spa_insert_checkout_custom_fields');
+
+// add custom fields to orders
+function spa_columns_orders($columns) {
+    $columns['factura'] = __('Factura', 'woocommerce');
+    $columns['rfc'] = __('RFC', 'woocommerce');
+    $columns['heard_us'] = __('How did you heard about us?', 'woocommerce');
+    return $columns;
+}
+add_filter('manage_edit-shop_order_columns', 'spa_columns_orders');
+
+// show content inside orders columns
+function spa_columns_orders_data($columns) {
+    global $post, $woocommerce, $order;
+    
+    if(empty($order) || $order->id != $post->ID) {
+        $order = new WC_Order($post->ID);
+    }
+
+    if($columns === "factura") {
+        $factura = get_post_meta($post->ID, 'factura', true);
+        echo $factura ? "Yes" : "No";
+    }
+    if($columns === "rfc") {
+        echo get_post_meta($post->ID, 'rfc', true);
+    }
+    if($columns === "heard_us") {
+        echo get_post_meta($post->ID, 'heard_us', true);
+    }
+
+    return $columns;
+}
+add_action('manage_shop_order_posts_custom_column', 'spa_columns_orders_data');
+
+// Show custom field in orders
+function spa_show_orders_info($order) {
+    $factura = get_post_meta($order->ID, 'factura', true);
+    if($factura) {
+        echo "<p><strong>".__('Factura', 'woocommerce').":</strong> " . ($factura ? "Yes" : "No") . "</p>";
+        $rfc = get_post_meta($order->ID, 'rfc', true);
+        echo "<p><strong>".__('RFC', 'woocommerce').":</strong> $rfc</p>";
+    }
+    $heard_us = get_post_meta($order->ID, 'heard_us', true);
+    echo "<p><strong>".__('How did you heard about us?', 'woocommerce').":</strong> $heard_us</p>";
+}
+add_action('woocommerce_admin_order_data_after_billing_address', 'spa_show_orders_info');

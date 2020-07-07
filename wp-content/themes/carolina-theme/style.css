@@ -655,3 +655,52 @@ p.subtitle {
 #billing_rfc_field {
     display: none;
 }
+
+/* style for custom fields icons */
+.icons-start {
+    background-color: #e282a8;
+    color: white;
+    padding: 1em 0;
+}
+
+.icons-start .col-full::after,
+.icons-start .columns-4::after
+ {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.icons-start .columns-4 {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1em;
+    justify-content: center;
+}
+
+.icons-start .columns-4:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .icons-start .columns-4 {
+        width: 33.33%;
+        float: left;
+        margin-bottom: 0;
+    }
+}
+
+.icons-start .columns-4 i {
+    margin-right: 1em;
+    font-size: 3em;
+}
+
+.icons-start .columns-4 p {
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.icons-start .columns-4 p,
+.icons-start .columns-4 i {
+    float: left;
+}

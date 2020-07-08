@@ -665,7 +665,7 @@ p.subtitle {
 
 .icons-start .col-full::after,
 .icons-start .columns-4::after
- {
+{
     display: block;
     content: '';
     clear: both;

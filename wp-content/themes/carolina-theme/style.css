@@ -665,7 +665,7 @@ p.subtitle {
 
 .icons-start .col-full::after,
 .icons-start .columns-4::after
- {
+{
     display: block;
     content: '';
     clear: both;
@@ -703,4 +703,21 @@ p.subtitle {
 .icons-start .columns-4 p,
 .icons-start .columns-4 i {
     float: left;
+}
+
+/* section headers styles */
+h2.section-title {
+    color: black;
+    font-size: 2.4em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h2.section-title::after {
+    content: '';
+    display: block;
+    height: 0.1em;
+    width: 2em;
+    background-color: #e282a8;
+    margin: 0.2em auto 0 auto;
 }

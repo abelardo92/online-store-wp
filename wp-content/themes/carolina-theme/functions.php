@@ -351,10 +351,18 @@ function spa_show_icons() {
         </div>
     </div>
 </div>
-icons here
 <div class="col-full">
 <div class="content-area">
 <div class="site-main">
 <?php
 }
 add_action('homepage', 'spa_show_icons', 15);
+
+// show image when there is no image in products (not working?)
+function spa_no_image($image_url) {
+    $image_url = get_stylesheet_directory_uri() . '/img/logo.png';
+    return $image_url;
+}
+add_filter('woocommerce_placeholder_img_src', 'spa_no_image', 10);
+
+

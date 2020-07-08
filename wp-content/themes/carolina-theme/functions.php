@@ -380,7 +380,17 @@ function spa_home_blog_post() {
     </div>
     <ul>
         <?php while($posts->have_posts()) : $posts->the_post(); ?>
-            <li><?php the_title('<h3>','</h3>') ?></li>
+            <li>
+                <?= the_post_thumbnail('shop_catalog') ?>
+                <?= the_title('<h3>','</h3>') ?>
+                <div class="post-content">
+                    <header class="post-header">
+                        <p>By: <?= the_author() ?> | <?= the_time(get_option('date_format')) ?></p>
+                    </header>
+                    <?= wp_trim_words(get_the_content(), 30, ' (...)') ?>
+                    <a href="<?= the_permalink() ?>" class="button post-link">See more &raquo;</a>
+                </div>
+            </li>
         <?php endwhile; wp_reset_postdata(); ?>
     </ul>
 

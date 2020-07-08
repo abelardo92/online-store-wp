@@ -327,3 +327,34 @@ function spa_show_orders_info($order) {
     echo "<p><strong>".__('How did you heard about us?', 'woocommerce').":</strong> $heard_us</p>";
 }
 add_action('woocommerce_admin_order_data_after_billing_address', 'spa_show_orders_info');
+
+// show store icons and descriptions
+function spa_show_icons() {
+    // close and open divs in order to have "icons here" covering the entire page
+?>
+</main>
+</div> <!-- #primary -->
+</div> <!-- .col-full -->
+<div class="icons-start">
+    <div class="col-full">
+        <div class="columns-4">
+            <?php echo str_replace("far", "fas", get_field('icon_1')); ?>
+            <p><?php the_field('description_icon_1'); ?></p>
+        </div>
+        <div class="columns-4">
+            <?php echo str_replace("far", "fas", get_field('icon_2')); ?>
+            <p><?php the_field('description_icon_2'); ?></p>
+        </div>
+        <div class="columns-4">
+            <?php echo str_replace("far", "fas", get_field('icon_3')); ?>
+            <p><?php the_field('description_icon_3'); ?></p>
+        </div>
+    </div>
+</div>
+icons here
+<div class="col-full">
+<div class="content-area">
+<div class="site-main">
+<?php
+}
+add_action('homepage', 'spa_show_icons', 15);

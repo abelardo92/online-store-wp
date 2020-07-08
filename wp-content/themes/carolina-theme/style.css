@@ -709,8 +709,9 @@ p.subtitle {
 h2.section-title {
     color: black;
     font-size: 2.4em;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
+    text-align: center;
 }
 
 h2.section-title::after {

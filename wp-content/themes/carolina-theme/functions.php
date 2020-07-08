@@ -365,4 +365,27 @@ function spa_no_image($image_url) {
 }
 add_filter('woocommerce_placeholder_img_src', 'spa_no_image', 10);
 
+// print blog posts in home page 
+function spa_home_blog_post() {
+    $args = array (
+        'post_type' => 'post',
+        'posts_per_page' => 3,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+    $posts = new WP_Query($args);
+    ?>
+    <div class="blog-posts">
+        <h2 class="section-title">Last blog posts</h2>
+    </div>
+    <ul>
+        <?php while($posts->have_posts()) : $posts->the_post(); ?>
+            <li><?php the_title('<h3>','</h3>') ?></li>
+        <?php endwhile; wp_reset_postdata(); ?>
+    </ul>
+
+    <?php
+}
+add_action('homepage', 'spa_home_blog_post', 80);
+
 

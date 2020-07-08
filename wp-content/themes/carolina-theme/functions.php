@@ -351,7 +351,6 @@ function spa_show_icons() {
         </div>
     </div>
 </div>
-icons here
 <div class="col-full">
 <div class="content-area">
 <div class="site-main">
